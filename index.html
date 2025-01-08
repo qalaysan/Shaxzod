@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasallikni Taxmin Qilish</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kasallikni Taxmin Qilish</h1>
+        
+        <div class="form-group">
+            <label for="name">Ism va Familiya:</label>
+            <input type="text" id="name" placeholder="Ism va Familiya" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="age">Yoshi:</label>
+            <input type="number" id="age" placeholder="Yosh" min="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Jinsi:</label>
+            <select id="gender">
+                <option value="erkak">Erkak</option>
+                <option value="ayol">Ayol</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="painLocation">Og'riq joyini tanlang:</label>
+            <select id="painLocation">
+                <option value="bosh">Bosh</option>
+                <option value="ko'krak">Ko'krak qafasi</option>
+                <option value="qorin">Qorin</option>
+                <option value="bel">Bel</option>
+                <option value="qo'l">Qo'l</option>
+                <option value="oyoq">Oyog'</option>
+                <option value="bo'yn">Bo'yn</option>
+            </select>
+        </div>
+        
+        <button onclick="predictDisease()">Kasallikni taxmin qiling</button>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function predictDisease() {
+            const name = document.getElementById('name').value;
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            const painLocation = document.getElementById('painLocation').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!name || !age || age <= 0) {
+                resultDiv.innerHTML = 'Iltimos, ism, familiya va yoshi to\'g\'ri kiritilsin.';
+                return;
+            }
+
+            let diseasePrediction = '';
+
+            switch (painLocation) {
+                case 'bosh':
+                    diseasePrediction = 'Migren yoki bosh miya qon aylanishi buzilishi.';
+                    break;
+                case 'ko\'krak':
+                    diseasePrediction = 'Yurak kasalliklari yoki oshqozon muammolari.';
+                    break;
+                case 'qorin':
+                    diseasePrediction = 'Appenditsit, oshqozon yarasi yoki ichak infeksiyalari.';
+                    break;
+                case 'bel':
+                    diseasePrediction = 'Orqa miya disklarining siqilishi yoki mushaklarning yirtilishi.';
+                    break;
+                case 'qo\'l':
+                    diseasePrediction = 'Tendonit yoki artrit.';
+                    break;
+                case 'oyoq':
+                    diseasePrediction = 'Plantar fasciitis yoki shin splints.';
+                    break;
+                case 'bo\'yn':
+                    diseasePrediction = 'Bo\'yn mushaklarining spazmi yoki nerv siqilishi.';
+                    break;
+                default:
+                    diseasePrediction = 'Og\'riq joyini to\'g\'ri tanlang.';
+                    break;
+            }
+
+            resultDiv.innerHTML = `${name}ning taxminiy kasalligi: ${diseasePrediction}`;
+        }
+    </script>
+</body>
+</html>
